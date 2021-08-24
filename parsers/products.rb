@@ -7,7 +7,7 @@ product = {}
 product['title'] = nokogiri.at_css('h1.prod-ProductTitle').text.strip
 
 #extract current price
-current_price = nokogiri.at_css('span.#price').attr('content').to_f
+current_price = nokogiri.at_css('span#price').attr('content').to_f
 if current_price
     product['price'] = nokogiri.at_css('span.visuallyhidden').text
 end
