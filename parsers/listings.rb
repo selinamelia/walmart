@@ -1,6 +1,6 @@
 nokogiri = Nokogiri.HTML(content)
 
-products = nokogiri.css('div.search-result-product-title gridview')
+products = nokogiri.css('div.search-result-product-title')
 products.each do |product|
     href = product.at_css('a.product-title-link')
     if href
