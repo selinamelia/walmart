@@ -14,13 +14,13 @@ products.each do |product|
     end
 end
 
-pagination_links = nokogiri.css('ul.paginator-list > li.active > a.active')
-pagination_links.each do |link|
-  url = URI.join('https://www.walmart.com', link['href']).to_s
-  pages << {
-      url: url,
-      page_type: 'listings',
-      fetch_type: 'browser',
-      vars: {}
-    }
-end
+# pagination_links = nokogiri.css('ul.paginator-list > li.active > a.active')
+# pagination_links.each do |link|
+#   url = URI.join('https://www.walmart.com', link['href']).to_s
+#   pages << {
+#       url: url,
+#       page_type: 'listings',
+#       fetch_type: 'browser',
+#       vars: {}
+#     }
+# end
