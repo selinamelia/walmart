@@ -57,7 +57,8 @@ product['publisher'] = nokogiri.at_css('a.prod-brandName').text.strip
 product['walmart_number'] = nokogiri.at_css('div.wm-item-number').text.split('#').last.strip
 
 #extract product image
-product['img_url'] = nokogiri.at_css('div.prod-hero-image > img.larger-hero-image-carousel-image')['src'].split('?').first
+img_url = nokogiri.at_css('.prod-hero-image-image')['src'].split('?').first
+product['img_url'] = "https:#{img_url}"
 
 #extract product categories
 product['categories'] = nokogiri.css('.breadcrumb-list li').collect{|li| li.text.strip.gsub('/','') }
