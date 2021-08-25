@@ -1,36 +1,36 @@
 nokogiri = Nokogiri.HTML(content)
 
-click_captha_code = " 
-await sleep(3000);
-if ( (await page.$('div#js-global-footer-wrapper form#hf-email-signup-form')) == null ){
-  await sleep(5412);
-  if ( (await page.$('div#px-captcha iframe[style*=\"display: block\"]')) !== null ) {
-    // hover to the captha validation and sleep a bit
-    await page.hover('iframe[style*=\"display: block\"]'); 
-    await sleep(1428); 
-    // click hold and wait loading new page
-    await Promise.all([
-      page.waitForNavigation(),
-      page.click('iframe[style*=\"display: block\"]', {delay: 9547}),
-    ]);          
-  };
-};
-"
-pages << {
-    fetch_type: "browser",
-    method: "GET",
-    force_fetch: true,
-    headers: { 
-    "User-Agent": "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"},
-    driver: {
-        code: click_captha_code
-    }
-}
+# click_captha_code = " 
+# await sleep(3000);
+# if ( (await page.$('div#js-global-footer-wrapper form#hf-email-signup-form')) == null ){
+#   await sleep(5412);
+#   if ( (await page.$('div#px-captcha iframe[style*=\"display: block\"]')) !== null ) {
+#     // hover to the captha validation and sleep a bit
+#     await page.hover('iframe[style*=\"display: block\"]'); 
+#     await sleep(1428); 
+#     // click hold and wait loading new page
+#     await Promise.all([
+#       page.waitForNavigation(),
+#       page.click('iframe[style*=\"display: block\"]', {delay: 9547}),
+#     ]);          
+#   };
+# };
+# "
+# pages << {
+#     fetch_type: "browser",
+#     method: "GET",
+#     force_fetch: true,
+#     headers: { 
+#     "User-Agent": "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"},
+#     driver: {
+#         code: click_captha_code
+#     }
+# }
 # initialize an empty hash
 product = {}
 
 #extract title
-product['title'] = nokogiri.at_css('h1.prod-ProductTitle').text.strip
+product['title'] = nokogiri.at_css('.prod-ProductTitle').text
 
 #extract current price
 current_price = nokogiri.at_css('span#price').attr('content').to_f
