@@ -30,7 +30,7 @@ nokogiri = Nokogiri.HTML(content)
 product = {}
 
 #extract title
-product['title'] = nokogiri.at_css('.prod-ProductTitle').text
+product['title'] = nokogiri.at_css('.prod-ProductTitle').text.strip
 
 #extract current price
 current_price = nokogiri.at_css('span#price').attr('content').to_f
