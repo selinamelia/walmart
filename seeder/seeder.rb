@@ -1,8 +1,8 @@
 click_captha_code = " 
 await sleep(3000);
-if ( (await page.$('div#js-global-footer-wrapper form#hf-email-signup-form')) == null ){
+if ( (await page.$('div#js-global-footer-wrapper')) == null ){
   await sleep(5412);
-  if ( (await page.$('div#px-captcha iframe[style*=\"display: block\"]')) !== null ) {
+  if ( (await page.$('div#px-captcha')) !== null ) {
     // hover to the captha validation and sleep a bit
     await page.hover('iframe[style*=\"display: block\"]'); 
     await sleep(1428); 
@@ -10,9 +10,11 @@ if ( (await page.$('div#js-global-footer-wrapper form#hf-email-signup-form')) ==
     await Promise.all([
       page.waitForNavigation(),
       page.click('iframe[style*=\"display: block\"]', {delay: 9547}),
-    ]);          
+    ]); 
   };
 };
+// FINAL CHECK
+page.waitForSelector('div#js-global-footer-wrapper', {timeout: 2000})
 "
 
 
