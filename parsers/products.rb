@@ -39,13 +39,12 @@ if current_price
 end
  
 #extract original price
-# original_price_div = nokogiri.at_css('.price-old')
-# original_price = original_price_div ? original_price_div.text.strip.gsub('$','').to_f : nil
-# product['original_price'] = original_price == 0.0 ? nil : original_price
+original_price = nokogiri.at_css('span.xxs-margin-left:nth-child(1) > span:nth-child(1)')
+product['original_price'] = original_price ? original_price.text.strip.split.last.gsub('$', '').to_f : nil
 
 #extract rating
-# rating = nokogiri.at_css('span.hiddenStarLabel .seo-avg-rating').text.strip.to_f
-# product['rating'] = rating == 0 ? nil : rating
+rating = nokogiri.at_css('button.average-rating > span:nth-child(1) > span:nth-child(1)').text.strip.to_f
+product['rating'] = rating == 0 ? nil : rating
 
 #extract number of reviews
 review_text = nokogiri.at_css('span.stars-reviews-count-node').text.strip
