@@ -39,25 +39,19 @@ products.each do |i|
     end
 end
 
-pagination_links = nokogiri.css('ul.paginator-list > li.active > a.active').text
+pagination_links = nokogiri.css('ul.paginator-list > li.active > a.active')
 pagination_links.each do |link|
-    if pagination_links
-        page = pagination_links.to_i
-        url = URI.join('https://www.walmart.com/browse/movies-tv-shows/4096?facet=new_releases:Last+90+Days&page=#{page}')
-        if next_page =~ /\Ahttps?:\/\//i
-            pages << {
-                #url: next_page,
-                page_type: "listings",
-                fetch_type: "browser",
-                method: "GET",
-                force_fetch: true,
-                headers: {
-                    "User-Agent" => "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
-                },
-                driver: {
-                    code: click_captha_code
-                }
-            }
-        end
-    end
+    url = URI.join('https://www.walmart.com', link['href']).to_s
+    pages << {
+        url: url,
+        page_type: 'listings',
+        fetch_type: 'browser',
+        method: "GET",
+        force_fetch: true,
+        headers: { 
+            "User-Agent": "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"},
+        driver: {
+            code: click_captha_code
+        }
+    }
 end
