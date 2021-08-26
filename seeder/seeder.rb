@@ -18,7 +18,7 @@ page.waitForSelector('div#js-global-footer-wrapper', {timeout: 2000})
 "
 
 pages << {
-  url: 'https://www.walmart.com/browse/movies-tv-shows/movies/4096_530598?cat_id=4096_530598&facet=new_releases%3ALast+90+Days',
+  url: 'https://www.walmart.com/browse/movies-tv-shows/movies/4096_530598/?cat_id=4096_530598&facet=new_releases%3ALast+90+Days',
   page_type: "listings",
   fetch_type: 'browser',
   force_fetch: true,
