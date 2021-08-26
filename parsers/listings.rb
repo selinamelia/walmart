@@ -40,20 +40,28 @@ products.each do |i|
 end
 
 
-current_page = nokogiri.at_css('ul.paginator-list > li.active > a.active').text
+LIMIT_PAGE = 10
+current_page = nokogiri.at_css('.paginator-list > li.active > a.active').text
+
 if current_page
-    next_page = current_page.to_i + 1
-    url = 'https://www.walmart.com/browse/movies-tv-shows/4096?facet=new_releases:Last+90+Days&page=#{next_page}'
-    pages << {
-        url: url,
-        page_type: 'listings',
-        fetch_type: 'browser',
+  current_page = current_page.to_i
+  if current_page <= LIMIT_PAGE
+    next_page = current_page ? "https://www.walmart.com/browse/movies-tv-shows/4096?facet=new_releases:Last+90+Days&page=#{current_page + 1}" : nil
+    if next_page =~ /\Ahttps?:\/\//i
+      pages << {
+        url: next_page,
+        page_type: "listings",
+        fetch_type: "browser",
         method: "GET",
         force_fetch: true,
-        headers: { 
-            "User-Agent": "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"},
+        headers: {
+          "User-Agent" => "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+        },
         driver: {
-            code: click_captha_code
+          enable_images: true,
+          code: click_captha_code
         }
-    }
+      }
+    end
+  end
 end
