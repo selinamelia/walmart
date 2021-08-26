@@ -41,9 +41,9 @@ end
 
 
 current_page = nokogiri.at_css('ul.paginator-list > li.active > a.active').text
-pagination_links.each do |link|
+if current_page
     next_page = current_page.to_i + 1
-    url = 'https://www.walmart.com/browse/movies-tv-shows/movies/4096_530598//?page=#{next_page}&cat_id=4096_530598&facet=new_releases:Last%2090%20Days'
+    url = 'https://www.walmart.com/browse/movies-tv-shows/4096?facet=new_releases:Last+90+Days&page=#{next_page}'
     pages << {
         url: url,
         page_type: 'listings',
