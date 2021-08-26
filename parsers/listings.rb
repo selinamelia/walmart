@@ -39,9 +39,11 @@ products.each do |i|
     end
 end
 
-pagination_links = nokogiri.css('ul.paginator-list > li.active > a')
+
+current_page = nokogiri.at_css('ul.paginator-list > li.active > a.active').text
 pagination_links.each do |link|
-    url = URI.join('https://www.walmart.com', link['href']).to_s
+    next_page = current_page.to_i + 1
+    url = 'https://www.walmart.com/browse/movies-tv-shows/movies/4096_530598//?page=#{next_page}&cat_id=4096_530598&facet=new_releases:Last%2090%20Days'
     pages << {
         url: url,
         page_type: 'listings',
