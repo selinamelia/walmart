@@ -12,7 +12,7 @@ click_captha_code = "
             await page.hover('iframe[style*=\"display: block\"]'); await sleep(1428); 
             // click hold and wait loading new page
             await Promise.all([
-                page.waitForNavigation({timeout: 30000}),
+                page.waitForNavigation({timeout: 70000}),
                 page.click('iframe[style*=\"display: block\"]', {delay: 9547}),
             ]);          
         };
