@@ -4,7 +4,7 @@ products = nokogiri.css('li.Grid-col')
 cookies = page['response_cookie']
 
 click_captha_code = " 
-    await sleep(3000);
+    await sleep(4000);
     if ( (await page.$('div#js-global-footer-wrapper form#hf-email-signup-form')) == null ) {
         await sleep(5412);
         if ( (await page.$('iframe[style*=\"display: block\"]')) !== null) {
@@ -12,7 +12,7 @@ click_captha_code = "
             await page.hover('iframe[style*=\"display: block\"]'); await sleep(1428); 
             // click hold and wait loading new page
             await Promise.all([
-                page.waitForNavigation({timeout: 70000}),
+                page.waitForNavigation({timeout: 90000}),
                 page.click('iframe[style*=\"display: block\"]', {delay: 9547}),
             ]);          
         };
